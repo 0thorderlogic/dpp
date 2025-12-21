@@ -15,9 +15,9 @@ const parts = [
 document.addEventListener('DOMContentLoaded', main);
 
 async function main() {
-    const motors = await loadData('motors.csv');
-    const escs = await loadData('esc.csv');
-    const propellers = await loadData('propellers.csv');
+    const motors = await loadData('data/motors.csv');
+    const escs = await loadData('data/esc.csv');
+    const propellers = await loadData('data/propellers.csv');
 
     createTable(motors, 'motors-table');
     createTable(escs, 'esc-table');
