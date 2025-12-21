@@ -1,0 +1,39 @@
+
+Thrust Calculator 
+---
+
+*THIS IS A WORK IN PROGRESS*
+
+Absolutely essential parts (minimum to fly a basic drone):
+
+Frame
+Motors
+Propellers
+Electronic Speed Controllers (ESCs)
+Flight Controller
+Battery (LiPo)
+Battery Connector
+Wiring
+Radio Transmitter
+Radio Receiver
+
+---
+
+Essential but often built-in / optional depending on setup:
+
+Power Distribution Board (or ESC power leads)
+Voltage Regulator / BEC
+Gyroscope & Accelerometer (usually inside the flight controller)
+
+---
+
+NOT essential to just fly (optional features):
+
+GPS Module
+Telemetry
+Camera / FPV system
+Gimbal
+Landing Gear
+Prop Guards
+Buzzer, LEDs
+Compass, Barometer
