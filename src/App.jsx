@@ -33,7 +33,7 @@ function App() {
         <div className="app-container">
           <header>
             <button className="theme-toggle" onClick={toggleTheme}>
-              {theme === "light" ? "Dark Mode" : "Light Mode"}
+              {theme === "light" ? "Dracula" : "Light"}
             </button>
             <h1>Drone Part Picker</h1>
             <small>
