@@ -1,17 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root {
-  --background-color: #ffffff;
-  --text-color: #000000;
-  --accent-color: #ff0000;
-  --border-color: #e0e0e0;
-  --secondary-background-color: #f2f2f2;
+  --background-color: oklch(98.4% 0.003 247.858);
+  --text-color: oklch(12.9% 0.042 264.695);
+  --accent-color: oklch(57.7% 0.245 27.325);
+  --border-color: oklch(70.4% 0.04 256.788);
+  --secondary-background-color: oklch(92.9% 0.013 255.508);
+}
+
+[data-theme='dark'] {
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+  --accent-color: #ff5252;
+  --border-color: #333;
+  --secondary-background-color: #1e1e1e;
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
   margin: 0;
   padding: 2em;
+}
+
+/* Swiss Design Minimalist Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-color);
+  border: 3px solid var(--background-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* Firefox Support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-color) var(--background-color);
+}
+
+.font-sans {
+  font-family: 'Google Sans Code', monospace;
 }
 
 .app-container {
@@ -21,12 +60,13 @@ body {
 
 header {
   margin-bottom: 2em;
+  position: relative;
 }
 
 h1 {
   text-align: center;
   font-size: 2.5em;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 0.5em;
   letter-spacing: -1px;
 }
@@ -51,7 +91,7 @@ h1 {
   text-decoration: none;
   color: var(--text-color);
   font-size: 1em;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   border-bottom: 3px solid transparent;
 }
@@ -70,7 +110,7 @@ h1 {
 
 h2 {
   font-size: 1.5em;
-  font-weight: 700;
+  font-weight: 600;
   margin-top: 0;
   margin-bottom: 1.5em;
   border-bottom: 2px solid var(--text-color);
@@ -79,7 +119,7 @@ h2 {
 
 h3 {
   font-size: 1.2em;
-  font-weight: 700;
+  font-weight: 600;
   margin-top: 2em;
   margin-bottom: 1em;
 }
@@ -90,7 +130,7 @@ h3 {
 }
 
 #part-picker label {
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 0.5em;
   display: block;
 }
@@ -114,27 +154,30 @@ h3 {
   border-radius: 0;
   box-sizing: border-box;
   background-color: var(--background-color);
+  color: var(--text-color);
   font-size: 1em;
 }
 
 .input-item {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Align items nicely */
+  justify-content: space-between;
+  /* Align items nicely */
 }
 
 .input-item label {
   font-size: 0.85em;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 5px;
-  color: #333;
+  color: var(--text-color);
+  opacity: 0.8;
 }
 
 #part-picker span,
 .weight-badge {
   display: block;
   margin-bottom: 0;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .weight-input-group {
@@ -157,7 +200,7 @@ h3 {
 .total-estimated-weight {
   margin-top: 1.5em;
   font-size: 1.2em;
-  font-weight: 700;
+  font-weight: 500;
   text-align: left;
 }
 
@@ -177,8 +220,9 @@ h3 {
   cursor: pointer;
   border: none;
   background-color: transparent;
+  color: var(--text-color);
   font-size: 1em;
-  font-weight: 700;
+  font-weight: 500;
   border-bottom: 3px solid transparent;
   text-transform: uppercase;
 }
@@ -213,7 +257,7 @@ td {
 
 th {
   background-color: var(--background-color);
-  font-weight: 700;
+  font-weight: 500;
   border-top: 2px solid var(--text-color);
   border-bottom: 2px solid var(--text-color);
 }
@@ -267,7 +311,7 @@ tbody tr:hover {
 }
 
 .banner-title {
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   margin-bottom: 0.5em;
   display: block;
@@ -286,22 +330,24 @@ tbody tr:hover {
 
 .stat-label {
   font-size: 0.8em;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  color: #666;
+  color: var(--text-color);
+  opacity: 0.6;
   margin-bottom: 0.5em;
   display: block;
 }
 
 .stat-value {
   font-size: 2em;
-  font-weight: 700;
+  font-weight: 600;
   display: block;
 }
 
 .stat-sub {
   font-size: 0.9em;
-  color: #444;
+  color: var(--text-color);
+  opacity: 0.8;
 }
 
 .graph-grid {
@@ -360,7 +406,7 @@ tbody tr:hover {
 
 .input-section-title {
   font-size: 1.1em;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   margin: 1.5em 0 1em 0;
   padding-bottom: 0.3em;
@@ -370,7 +416,7 @@ tbody tr:hover {
 .info-box {
   margin-top: 1em;
   padding: 1em;
-  background-color: #eee;
+  background-color: var(--secondary-background-color);
   font-size: 0.9em;
 }
 
@@ -390,4 +436,32 @@ tbody tr:hover {
   .graph-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.footer {
+  margin-top: 2em;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1em;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  background: var(--secondary-background-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  color: var(--accent-color);
+
+}
+
+a {
+  color: var(--accent-color);
 }

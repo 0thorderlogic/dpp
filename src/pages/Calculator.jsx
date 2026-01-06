@@ -557,14 +557,17 @@ const Calculator = () => {
               <h3>Thrust vs Throttle</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={throttleData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="throttle" />
-                  <YAxis />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border-color)" />
+                  <XAxis dataKey="throttle" stroke="var(--text-color)" />
+                  <YAxis stroke="var(--text-color)" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'var(--secondary-background-color)', borderColor: 'var(--border-color)', color: 'var(--text-color)' }}
+                    itemStyle={{ color: 'var(--text-color)' }}
+                  />
                   <Line
                     type="monotone"
                     dataKey="thrust"
-                    stroke="#000"
+                    stroke="var(--accent-color)"
                     strokeWidth={2}
                     dot={false}
                     name="Total Thrust (g)"
@@ -577,14 +580,17 @@ const Calculator = () => {
               <h3>Power Draw vs Throttle</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={throttleData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="throttle" />
-                  <YAxis />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border-color)" />
+                  <XAxis dataKey="throttle" stroke="var(--text-color)" />
+                  <YAxis stroke="var(--text-color)" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'var(--secondary-background-color)', borderColor: 'var(--border-color)', color: 'var(--text-color)' }}
+                    itemStyle={{ color: 'var(--text-color)' }}
+                  />
                   <Line
                     type="monotone"
                     dataKey="power"
-                    stroke="#000"
+                    stroke="var(--accent-color)"
                     strokeWidth={2}
                     dot={false}
                     name="Power (W)"
@@ -597,11 +603,14 @@ const Calculator = () => {
               <h3>Flight Time vs Battery</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={batteryCapacityData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="capacity" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="flightTime" fill="#333" name="Time (min)" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border-color)" />
+                  <XAxis dataKey="capacity" stroke="var(--text-color)" />
+                  <YAxis stroke="var(--text-color)" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'var(--secondary-background-color)', borderColor: 'var(--border-color)', color: 'var(--text-color)' }}
+                    itemStyle={{ color: 'var(--text-color)' }}
+                  />
+                  <Bar dataKey="flightTime" fill="var(--accent-color)" name="Time (min)" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -610,14 +619,17 @@ const Calculator = () => {
               <h3>Current Draw vs Throttle</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={throttleData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="throttle" />
-                  <YAxis />
-                  <Tooltip />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border-color)" />
+                  <XAxis dataKey="throttle" stroke="var(--text-color)" />
+                  <YAxis stroke="var(--text-color)" />
+                  <Tooltip 
+                    contentStyle={{ backgroundColor: 'var(--secondary-background-color)', borderColor: 'var(--border-color)', color: 'var(--text-color)' }}
+                    itemStyle={{ color: 'var(--text-color)' }}
+                  />
                   <Line
                     type="monotone"
                     dataKey="current"
-                    stroke="#000"
+                    stroke="var(--accent-color)"
                     strokeWidth={2}
                     dot={false}
                     name="Current (A)"
