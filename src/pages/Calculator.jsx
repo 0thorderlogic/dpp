@@ -1,6 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { AlertCircle } from 'lucide-react';
 
 const Calculator = () => {
   const [components, setComponents] = useState({
@@ -220,8 +219,7 @@ const Calculator = () => {
       
       <div className="banner">
         <span className="banner-title">
-          <AlertCircle size={16} inline="true" style={{ verticalAlign: 'middle', marginRight: '5px' }} />
-          Accuracy Notice
+          ⚠️Accuracy Notice
         </span>
         <p style={{ margin: 0, fontSize: '0.9em' }}>
           Calculations are <strong>estimates only</strong>. Results depend on motor bench tests and battery health. 

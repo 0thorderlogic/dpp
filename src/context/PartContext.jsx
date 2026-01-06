@@ -29,9 +29,9 @@ export const PartProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const motorsData = await loadCSVData('/data/motors.csv');
-      const escsData = await loadCSVData('/data/esc.csv');
-      const propellersData = await loadCSVData('/data/propellers.csv');
+      const motorsData = await loadCSVData(`${import.meta.env.BASE_URL}data/motors.csv`);
+      const escsData = await loadCSVData(`${import.meta.env.BASE_URL}data/esc.csv`);
+      const propellersData = await loadCSVData(`${import.meta.env.BASE_URL}data/propellers.csv`);
       
       setMotors(motorsData);
       setEscs(escsData);

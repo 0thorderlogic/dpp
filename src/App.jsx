@@ -8,7 +8,7 @@ import './index.css';
 function App() {
   return (
     <PartProvider>
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <div className="app-container">
           <header>
             <h1>Drone Part Picker</h1>
