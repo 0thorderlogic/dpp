@@ -1,0 +1,15 @@
+Drone Part Picker 
+---
+Project Structure:
+src/
+├── context/
+│   └── PartContext.jsx   # Shared state for selections and weights
+├── pages/
+│   ├── Calculator.jsx    # Primary Part Picker
+│   ├── WeightPage.jsx    # Calculation & component weights
+│   └── DataViewer.jsx    # Tabbed data tables
+├── utils/
+│   └── dataLoader.js     # PapaParse CSV logic
+├── App.jsx               # Routing and Header
+└── index.css             # Original barebones styling
+
