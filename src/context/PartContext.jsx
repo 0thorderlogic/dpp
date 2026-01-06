@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { loadCSVData } from "../utils/dataLoader";
 
 const PartContext = createContext();
@@ -12,17 +12,33 @@ export const PartProvider = ({ children }) => {
   const [selectedEsc, setSelectedEsc] = useState("");
   const [selectedPropeller, setSelectedPropeller] = useState("");
 
+  const [config, setConfig] = useState({
+    motorCount: 4,
+    escCount: 4,
+    batteryCells: 4,
+    batteryCapacity: 1500,
+    batteryCRating: 75,
+    batteryInternalResistance: 10,
+    escEfficiency: 96,
+    motorEfficiency: 75,
+    fcCurrentDraw: 0.5,
+    cameraCurrentDraw: 0.2,
+    vtxCurrentDraw: 0.4,
+    receiverCurrentDraw: 0.1,
+    avgThrottle: 50,
+    hoverThrottle: 35,
+    useActualThrustData: false,
+    motorThrust100: 1850,
+  });
+
   const [otherWeights, setOtherWeights] = useState({
-    "Frame": 0,
-    "Flight Controller": 0,
-    "Battery (LiPo)": 0,
-    "Battery Connector": 0,
-    "Wiring": 0,
-    "Radio Transmitter": 0,
-    "Radio Receiver": 0,
-    "Power Distribution Board": 0,
-    "Voltage Regulator / BEC": 0,
-    "Payload": 0,
+    "Frame": 120,
+    "Flight Controller": 8,
+    "Battery (LiPo)": 180,
+    "Camera": 15,
+    "VTX": 8,
+    "Receiver": 3,
+    "Other (screws, wires)": 30,
   });
 
   const [loading, setLoading] = useState(true);
@@ -55,24 +71,37 @@ export const PartProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  const getWeight = (data, name, key) => {
-    const item = data.find((i) => i.Name === name);
-    return item ? parseFloat(item[key]) || 0 : 0;
-  };
+  const selectedMotorObj = useMemo(() => 
+    motors.find(m => m.Name === selectedMotor) || {}, 
+  [motors, selectedMotor]);
 
-  const propulsionWeight =
-    (getWeight(motors, selectedMotor, "Weight (g)") * 4) +
-    (getWeight(escs, selectedEsc, "Weight (g)") * 4) +
-    getWeight(propellers, selectedPropeller, "Weight_g");
+  const selectedEscObj = useMemo(() => 
+    escs.find(e => e.Name === selectedEsc) || {}, 
+  [escs, selectedEsc]);
 
-  const othersTotalWeight = Object.values(otherWeights).reduce(
-    (a, b) => a + (parseFloat(b) || 0),
-    0,
-  );
+  const selectedPropellerObj = useMemo(() => 
+    propellers.find(p => p.Name === selectedPropeller) || {}, 
+  [propellers, selectedPropeller]);
+
+  const propulsionWeight = useMemo(() => {
+    const mw = parseFloat(selectedMotorObj["Weight (g)"]) || 0;
+    const ew = parseFloat(selectedEscObj["Weight (g)"]) || 0;
+    const pw = parseFloat(selectedPropellerObj["Weight_g"]) || 0;
+    return (mw * config.motorCount) + (ew * config.escCount) + (pw * config.motorCount);
+  }, [selectedMotorObj, selectedEscObj, selectedPropellerObj, config.motorCount, config.escCount]);
+
+  const othersTotalWeight = useMemo(() => 
+    Object.values(otherWeights).reduce((a, b) => a + (parseFloat(b) || 0), 0),
+  [otherWeights]);
+
   const totalWeight = propulsionWeight + othersTotalWeight;
 
   const updateOtherWeight = (part, weight) => {
     setOtherWeights((prev) => ({ ...prev, [part]: weight }));
+  };
+
+  const updateConfig = (key, value) => {
+    setConfig(prev => ({ ...prev, [key]: value }));
   };
 
   return (
@@ -87,8 +116,13 @@ export const PartProvider = ({ children }) => {
         setSelectedEsc,
         selectedPropeller,
         setSelectedPropeller,
+        selectedMotorObj,
+        selectedEscObj,
+        selectedPropellerObj,
         otherWeights,
         updateOtherWeight,
+        config,
+        updateConfig,
         propulsionWeight,
         totalWeight,
         othersTotalWeight,

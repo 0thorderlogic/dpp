@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   Bar,
   BarChart,
@@ -11,82 +11,71 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useParts } from "../context/PartContext";
 
 const Calculator = () => {
-  const [components, setComponents] = useState({
-    // Motors
-    motorCount: 4,
-    motorWeight: 28, // grams per motor
-    motorKV: 2300,
-    motorMaxCurrent: 30, // amps per motor at 100% throttle
-    motorThrust100: 1850, // grams thrust at 100% throttle (user measured)
-    motorThrust50: 550, // grams thrust at 50% throttle
-    motorEfficiency: 75, // percentage
-    useActualThrustData: false, // toggle for measured vs estimated
+  const {
+    selectedMotorObj,
+    selectedEscObj,
+    selectedPropellerObj,
+    otherWeights,
+    updateOtherWeight,
+    config,
+    updateConfig,
+    totalWeight: sharedTotalWeight,
+    loading
+  } = useParts();
 
-    // Propellers
-    propSize: 5, // inches
-    propPitch: 4.3,
-
-    // Battery
-    batteryCells: 4, // 4S
-    batteryCapacity: 1500, // mAh
-    batteryWeight: 180, // grams
-    batteryCRating: 75,
-    batteryInternalResistance: 10, // milliohms per cell
-
-    // ESC
-    escWeight: 8, // grams per ESC
-    escCount: 4,
-    escEfficiency: 96, // percentage
-
-    // Frame
-    frameWeight: 120, // grams
-
-    // Flight Controller
-    fcWeight: 8,
-    fcCurrentDraw: 0.5, // amps
-
-    // Camera & VTX
-    cameraWeight: 15,
-    cameraCurrentDraw: 0.2, // amps
-    vtxWeight: 8,
-    vtxCurrentDraw: 0.4, // amps at 25mW
-
-    // Receiver
-    receiverWeight: 3,
-    receiverCurrentDraw: 0.1, // amps
-
-    // Other
-    otherWeight: 30, // screws, wires, etc
-
-    // Flight parameters
-    avgThrottle: 50, // percentage
-    hoverThrottle: 35, // percentage needed to hover
-  });
-
-  const updateComponent = (key, value) => {
-    setComponents((prev) => ({
-      ...prev,
-      [key]: key === "useActualThrustData" ? value : (parseFloat(value) || 0),
-    }));
-  };
+  const components = useMemo(() => {
+    return {
+      motorCount: config.motorCount,
+      motorWeight: parseFloat(selectedMotorObj["Weight (g)"]) || 28,
+      motorKV: parseFloat(selectedMotorObj["Kv value (rpm/v)"]) || 2300,
+      motorMaxCurrent: parseFloat(selectedEscObj["Max_current_A"]) || 30,
+      motorThrust100: config.motorThrust100,
+      useActualThrustData: config.useActualThrustData,
+      propSize: parseFloat(selectedPropellerObj["Diameter_in"]) || 5,
+      propPitch: parseFloat(selectedPropellerObj["Pitch_in"]) || 4.3,
+      batteryCells: config.batteryCells,
+      batteryCapacity: config.batteryCapacity,
+      batteryWeight: parseFloat(otherWeights["Battery (LiPo)"]) || 180,
+      batteryCRating: config.batteryCRating,
+      batteryInternalResistance: config.batteryInternalResistance,
+      escWeight: parseFloat(selectedEscObj["Weight (g)"]) || 8,
+      escCount: config.escCount,
+      escEfficiency: config.escEfficiency,
+      frameWeight: parseFloat(otherWeights["Frame"]) || 120,
+      fcWeight: parseFloat(otherWeights["Flight Controller"]) || 8,
+      fcCurrentDraw: config.fcCurrentDraw,
+      cameraWeight: parseFloat(otherWeights["Camera"]) || 15,
+      cameraCurrentDraw: config.cameraCurrentDraw,
+      vtxWeight: parseFloat(otherWeights["VTX"]) || 8,
+      vtxCurrentDraw: config.vtxCurrentDraw,
+      receiverWeight: parseFloat(otherWeights["Receiver"]) || 3,
+      receiverCurrentDraw: config.receiverCurrentDraw,
+      otherWeight: parseFloat(otherWeights["Other (screws, wires)"]) || 30,
+      avgThrottle: config.avgThrottle,
+      hoverThrottle: config.hoverThrottle,
+    };
+  }, [config, selectedMotorObj, selectedEscObj, selectedPropellerObj, otherWeights]);
 
   const calculations = useMemo(() => {
     const nominalVoltage = components.batteryCells * 3.7;
     const maxVoltage = components.batteryCells * 4.2;
-    const minVoltage = components.batteryCells * 3.3; // cutoff voltage
+    const minVoltage = components.batteryCells * 3.3;
 
-    // Weight calculations (all in grams)
     const motorTotalWeight = components.motorCount * components.motorWeight;
     const escTotalWeight = components.escCount * components.escWeight;
-    const totalWeight = motorTotalWeight + escTotalWeight +
+    const propTotalWeight = components.motorCount * (parseFloat(selectedPropellerObj["Weight_g"]) || 0);
+    
+    // Use shared total weight but recalculate for precision if needed, 
+    // or just use components to be consistent with the UI inputs here.
+    const totalWeight = motorTotalWeight + escTotalWeight + propTotalWeight +
       components.frameWeight +
       components.fcWeight + components.cameraWeight +
       components.vtxWeight + components.receiverWeight +
       components.batteryWeight + components.otherWeight;
 
-    // Thrust calculations
     let thrustPerMotor100, maxThrust;
 
     if (components.useActualThrustData) {
@@ -137,16 +126,6 @@ const Calculator = () => {
     const hoverPowerDraw = avgVoltage * hoverActualCurrent;
     const hoverFlightTime = (energyAvailable / hoverPowerDraw) * 60;
 
-    let hoverThrust;
-    if (components.useActualThrustData) {
-      const throttleRatio = components.hoverThrottle / 100;
-      hoverThrust = components.motorThrust100 * Math.pow(throttleRatio, 2) *
-        components.motorCount;
-    } else {
-      hoverThrust = thrustPerMotor100 * Math.pow(hoverThrottleFraction, 2) *
-        components.motorCount;
-    }
-
     return {
       totalWeight,
       maxThrust,
@@ -160,14 +139,13 @@ const Calculator = () => {
       hoverFlightTime,
       motorTotalWeight,
       escTotalWeight,
+      propTotalWeight,
       thrustPerMotor100,
       motorsCurrentDraw,
       auxCurrentDraw,
       voltageSag,
-      hoverThrust,
-      hoverPowerDraw,
     };
-  }, [components]);
+  }, [components, selectedPropellerObj]);
 
   const throttleData = useMemo(() => {
     return Array.from({ length: 21 }, (_, i) => {
@@ -210,30 +188,16 @@ const Calculator = () => {
     });
   }, [calculations]);
 
-  const batteryDischargeData = useMemo(() => {
-    const minVoltage = components.batteryCells * 3.3;
-    return Array.from({ length: 21 }, (_, i) => {
-      const percent = 100 - i * 5;
-      const dischargeFraction = (100 - percent) / 100;
-      const voltage = calculations.maxVoltage -
-        (calculations.maxVoltage - minVoltage) *
-          (dischargeFraction + 0.3 * dischargeFraction * dischargeFraction);
-      return {
-        percent,
-        voltage: Math.max(voltage, minVoltage).toFixed(2),
-      };
-    });
-  }, [calculations, components]);
-
   const weightDistributionData = useMemo(() => {
     const total = calculations.totalWeight;
     const segments = [
       { name: "Motors", value: calculations.motorTotalWeight, color: "#333" },
       { name: "ESCs", value: calculations.escTotalWeight, color: "#555" },
+      { name: "Props", value: calculations.propTotalWeight, color: "#666" },
       { name: "Battery", value: components.batteryWeight, color: "#777" },
       { name: "Frame", value: components.frameWeight, color: "#999" },
       {
-        name: "FC/Elec",
+        name: "Electronics",
         value: components.fcWeight + components.cameraWeight +
           components.vtxWeight + components.receiverWeight,
         color: "#bbb",
@@ -246,62 +210,48 @@ const Calculator = () => {
     }));
   }, [components, calculations]);
 
+  if (loading) return <div className="container">Loading performance data...</div>;
+
   return (
     <div className="container">
       <h2>Build Config & Performance Analysis</h2>
 
       <div className="banner">
         <span className="banner-title">
-          ⚠️ Accuracy Notice
+          ⚠️ Performance Integrated
         </span>
         <p style={{ margin: 0, fontSize: "0.9em" }}>
-          Calculations are{" "}
-          <strong>estimates only</strong>. Results depend on motor bench tests
-          and battery health. Real-world variables like wind and flying style
-          will affect performance.
+          This calculator is synced with your <strong>Part Picker</strong> selections. 
+          Change parts in the Weight tab to see how they affect your drone's performance.
         </p>
       </div>
 
       <div className="calculator-container">
         {/* Input Section */}
         <div className="inputs-section">
-          <h3>Components</h3>
+          <h3>Build Parameters</h3>
 
-          <div className="input-section-title">Motors</div>
+          <div className="input-section-title">Propulsion (from Picker)</div>
           <div className="part-group">
             <div className="input-item">
               <label>Motor Count</label>
               <input
                 type="number"
-                value={components.motorCount}
-                onChange={(e) => updateComponent("motorCount", e.target.value)}
+                value={config.motorCount}
+                onChange={(e) => updateConfig("motorCount", parseInt(e.target.value) || 0)}
               />
             </div>
             <div className="input-item">
-              <label>Weight (g each)</label>
+              <label>ESC Count</label>
               <input
                 type="number"
-                value={components.motorWeight}
-                onChange={(e) => updateComponent("motorWeight", e.target.value)}
+                value={config.escCount}
+                onChange={(e) => updateConfig("escCount", parseInt(e.target.value) || 0)}
               />
             </div>
-            <div className="input-item">
-              <label>KV Rating</label>
-              <input
-                type="number"
-                value={components.motorKV}
-                onChange={(e) => updateComponent("motorKV", e.target.value)}
-              />
-            </div>
-            <div className="input-item">
-              <label>Max Amps (100%)</label>
-              <input
-                type="number"
-                value={components.motorMaxCurrent}
-                onChange={(e) =>
-                  updateComponent("motorMaxCurrent", e.target.value)}
-              />
-            </div>
+          </div>
+          <div className="info-box" style={{ fontSize: '0.85em', opacity: 0.8 }}>
+            Selected: <strong>{selectedMotorObj.Name || "None"}</strong> + <strong>{selectedPropellerObj.Name || "None"}</strong>
           </div>
 
           <div className="info-box">
@@ -315,77 +265,55 @@ const Calculator = () => {
             >
               <input
                 type="checkbox"
-                checked={components.useActualThrustData}
+                checked={config.useActualThrustData}
                 onChange={(e) =>
-                  updateComponent("useActualThrustData", e.target.checked)}
+                  updateConfig("useActualThrustData", e.target.checked)}
                 style={{ width: "auto", marginRight: "10px" }}
               />
               Use Measured Thrust
             </label>
-            {components.useActualThrustData && (
+            {config.useActualThrustData && (
               <div style={{ marginTop: "10px" }}>
                 <div className="input-item">
                   <label>Max Thrust (g)</label>
                   <input
                     type="number"
-                    value={components.motorThrust100}
+                    value={config.motorThrust100}
                     onChange={(e) =>
-                      updateComponent("motorThrust100", e.target.value)}
+                      updateConfig("motorThrust100", parseFloat(e.target.value) || 0)}
                   />
                 </div>
               </div>
             )}
           </div>
 
-          <div className="input-section-title">Propellers</div>
-          <div className="part-group">
-            <div className="input-item">
-              <label>Size (inch)</label>
-              <input
-                type="number"
-                step="0.1"
-                value={components.propSize}
-                onChange={(e) => updateComponent("propSize", e.target.value)}
-              />
-            </div>
-            <div className="input-item">
-              <label>Pitch</label>
-              <input
-                type="number"
-                step="0.1"
-                value={components.propPitch}
-                onChange={(e) => updateComponent("propPitch", e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div className="input-section-title">Battery</div>
+          <div className="input-section-title">Battery Specs</div>
           <div className="part-group">
             <div className="input-item">
               <label>Cells (S)</label>
               <input
                 type="number"
-                value={components.batteryCells}
+                value={config.batteryCells}
                 onChange={(e) =>
-                  updateComponent("batteryCells", e.target.value)}
+                  updateConfig("batteryCells", parseInt(e.target.value) || 1)}
               />
             </div>
             <div className="input-item">
               <label>Capacity (mAh)</label>
               <input
                 type="number"
-                value={components.batteryCapacity}
+                value={config.batteryCapacity}
                 onChange={(e) =>
-                  updateComponent("batteryCapacity", e.target.value)}
+                  updateConfig("batteryCapacity", parseFloat(e.target.value) || 0)}
               />
             </div>
             <div className="input-item">
               <label>Weight (g)</label>
               <input
                 type="number"
-                value={components.batteryWeight}
+                value={otherWeights["Battery (LiPo)"]}
                 onChange={(e) =>
-                  updateComponent("batteryWeight", e.target.value)}
+                  updateOtherWeight("Battery (LiPo)", parseFloat(e.target.value) || 0)}
               />
             </div>
           </div>
@@ -396,75 +324,53 @@ const Calculator = () => {
               <label>Avg Throttle (%)</label>
               <input
                 type="number"
-                value={components.avgThrottle}
-                onChange={(e) => updateComponent("avgThrottle", e.target.value)}
+                value={config.avgThrottle}
+                onChange={(e) => updateConfig("avgThrottle", parseFloat(e.target.value) || 0)}
               />
             </div>
             <div className="input-item">
               <label>Hover Throttle (%)</label>
               <input
                 type="number"
-                value={components.hoverThrottle}
+                value={config.hoverThrottle}
                 onChange={(e) =>
-                  updateComponent("hoverThrottle", e.target.value)}
+                  updateConfig("hoverThrottle", parseFloat(e.target.value) || 0)}
               />
             </div>
           </div>
 
-          <div className="input-section-title">Electronics (g)</div>
+          <div className="input-section-title">Other Weights (g)</div>
           <div className="part-group">
             <div className="input-item">
-              <label>Flight Controller</label>
+              <label>Frame</label>
               <input
                 type="number"
-                value={components.fcWeight}
-                onChange={(e) => updateComponent("fcWeight", e.target.value)}
+                value={otherWeights["Frame"]}
+                onChange={(e) => updateOtherWeight("Frame", parseFloat(e.target.value) || 0)}
+              />
+            </div>
+            <div className="input-item">
+              <label>FC</label>
+              <input
+                type="number"
+                value={otherWeights["Flight Controller"]}
+                onChange={(e) => updateOtherWeight("Flight Controller", parseFloat(e.target.value) || 0)}
               />
             </div>
             <div className="input-item">
               <label>Camera</label>
               <input
                 type="number"
-                value={components.cameraWeight}
-                onChange={(e) =>
-                  updateComponent("cameraWeight", e.target.value)}
+                value={otherWeights["Camera"]}
+                onChange={(e) => updateOtherWeight("Camera", parseFloat(e.target.value) || 0)}
               />
             </div>
-            <div className="input-item">
+             <div className="input-item">
               <label>VTX</label>
               <input
                 type="number"
-                value={components.vtxWeight}
-                onChange={(e) => updateComponent("vtxWeight", e.target.value)}
-              />
-            </div>
-            <div className="input-item">
-              <label>Receiver</label>
-              <input
-                type="number"
-                value={components.receiverWeight}
-                onChange={(e) =>
-                  updateComponent("receiverWeight", e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div className="input-section-title">Other Parts (g)</div>
-          <div className="part-group">
-            <div className="input-item">
-              <label>Frame</label>
-              <input
-                type="number"
-                value={components.frameWeight}
-                onChange={(e) => updateComponent("frameWeight", e.target.value)}
-              />
-            </div>
-            <div className="input-item">
-              <label>Other (screws, etc)</label>
-              <input
-                type="number"
-                value={components.otherWeight}
-                onChange={(e) => updateComponent("otherWeight", e.target.value)}
+                value={otherWeights["VTX"]}
+                onChange={(e) => updateOtherWeight("VTX", parseFloat(e.target.value) || 0)}
               />
             </div>
           </div>
@@ -514,7 +420,7 @@ const Calculator = () => {
                 {calculations.flightTime.toFixed(1)}m
               </span>
               <span className="stat-sub">
-                At {components.avgThrottle}% throttle
+                At {config.avgThrottle}% throttle
               </span>
             </div>
           </div>
@@ -530,7 +436,7 @@ const Calculator = () => {
                     width: `${segment.percent}%`,
                     backgroundColor: segment.color,
                   }}
-                  title={`${segment.name}: ${segment.value}g (${
+                  title={`${segment.name}: ${segment.value.toFixed(1)}g (${
                     segment.percent.toFixed(1)
                   }%)`}
                 />

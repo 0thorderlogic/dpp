@@ -38,7 +38,7 @@ function App() {
             <h1>Drone Part Picker</h1>
             <small>
               <h1>
-                Technological Innovation Hub @ Indian Statistical Institute
+                Technology Innovation Hub @ Indian Statistical Institute
               </h1>
             </small>
             <nav className="main-nav">
