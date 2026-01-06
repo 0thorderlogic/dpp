@@ -11,7 +11,7 @@ function App() {
       <Router>
         <div className="app-container">
           <header>
-            <h1>Thrust Calculator</h1>
+            <h1>Drone Part Picker</h1>
             <small><h1>Technological Innovation Hub @ Indian Statistical Institute</h1></small>
             <nav className="main-nav">
               <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
