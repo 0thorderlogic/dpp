@@ -1,55 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drone Part Picker & Data Viewer</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Thrust Calculator</h1>
-    <small><h1>Technological Innovation Hub @ Indian Statistical Institute</h1></small>
-
-    <div class="container">
-        <div id="part-picker">
-            <h2>Part Picker</h2>
-            <div class="part-group">
-                <label for="motor-select">Motor:</label>
-                <select id="motor-select"></select>
-                <span id="motor-weight"></span>
-            </div>
-            
-            <div class="part-group">
-                <label for="esc-select">ESC (Electronic Speed Controller): </label>
-                <select id="esc-select"></select>
-                <span id="esc-weight"></span>
-            </div>
-            
-            <div class="part-group">
-                <label for="propeller-select">Propeller:</label>
-                <select id="propeller-select"></select>
-                <span id="propeller-weight"></span>
-            </div>
-            
-            <h3>Component Weights (in grams)</h3>
-            <div id="weight-inputs"></div>
-            <button id="calculate-weight">Calculate Total Weight</button>
-            <div id="total-weight"></div>
-        </div>
-
-        <div id="data-tables">
-            <div class="tabs">
-                <button class="tab-button active" data-tab="esc-table">ESC Data</button>
-                <button class="tab-button" data-tab="motors-table">Motors Data</button>
-                <button class="tab-button" data-tab="propellers-table">Propellers Data</button>
-            </div>
-            <div id="esc-table" class="tab-content active"></div>
-            <div id="motors-table" class="tab-content"></div>
-            <div id="propellers-table" class="tab-content"></div>
-        </div>
-    </div>
-
-    <script src="./scripts/data.js"></script>
-    <script src="./scripts/script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>temp-react</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

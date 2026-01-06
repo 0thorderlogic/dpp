@@ -1,0 +1,55 @@
+Name,Tests,Max_current_A,BEC_current_A
+T-Motor F45A,79,55,
+Zubax Myxa A2,77,,
+EMAX BLHeli 80A UBEC 5A 5V,59,80,5
+Flycolor XCross Blheli32 50A ESC,57,50,
+KDE Direct KDEXF-UAS35,27,35,
+T Motor F55,27,,
+EMAX BLHeli 30A BEC 2A 5V,21,30,2
+T-Motor F35A,20,35,45
+T-Motor Air 40A,20,,
+T-Motor FLAME 60A 12S,17,60,
+Afro Race Spec Mini ESC with BEC 20A,15,20,0.5
+T-Motor ALPHA 40A 6S,15,40,
+VGood 60A SBEC 2-6S LIPO,14,,
+Spedix ES30 HV 30A 2to6S BLHeliS,12,30,
+RCbenchmark x Xoar F50,12,50,
+Castle Creations DMR3040,12,40,
+T-Motor FLAME 70A 6S,11,70,
+Xoar titan esc,10,,
+KDE Direct KDEXF-UAS55,9,55,
+HobbyKing 30A ESC 3A UBEC,7,30,3
+HW 40A 6S,7,,
+Flier Airplane 350A,6,350,
+HobbyWing XRotor 40A,5,40,
+Flier F-22S-350A-A,4,350,
+Xoar Pulse A200,4,200,
+T-Motor Air 20A,4,20,
+T-Motor AT 55A 6S,4,55,5
+HW 80A 12S,4,80,
+T-Motor flame 180A HV,3,180,
+Cyclone 35A,3,,
+HobbyWing 80A V2-UBEG,3,,
+Holybro BLHeliS 20A,3,20,
+Xoar Pulse A120,2,,
+T Motor FLAME 280A HV,2,280,
+Diatone mamba f50 pro,2,50,
+TM 60A 12S,2,60,
+RCElectricParts 60A Electric Speed Controller Pre-Soldered,1,60,4
+Turnigy Plush 30amp Speed Controller,1,30,2
+Lumenier 51A BLHeli32 32bit 2x6S with Telemetry,1,51,
+DYS Aria 70A 3 6S Blheli32,1,70,
+Flyduino KISS ESC32A,1,32,
+Scorpion Power System LTD Tribunus II 12-80A SBEC,1,120,10
+Scorpion Power System LTD Legatus 12-60A FOC,1,100,
+U40,1,,
+Vertiq 60-08 KV300 G1 ESC,1,33,
+Hobbywing Skywalker 40,1,40,3
+TM 60A 6S,1,,
+XC-U 60A 6S,1,60,
+RD T 60A 12S,1,60,
+Lumenier 36A BLHeli32 32bit 2x6S with Telemetry,0,36,
+T-Motor FLAME 280A 24S,0,,
+HOBBYKING 60A SBEC,0,,
+Flywoo GOKU GH356S,0,,
+Flameback 45A 6S,0,50,
