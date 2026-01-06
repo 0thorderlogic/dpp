@@ -1,98 +1,98 @@
 :root {
-    --background-color: #ffffff;
-    --text-color: #000000;
-    --accent-color: #ff0000;
-    --border-color: #e0e0e0;
-    --secondary-background-color: #f2f2f2;
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --accent-color: #ff0000;
+  --border-color: #e0e0e0;
+  --secondary-background-color: #f2f2f2;
 }
 
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 2em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 2em;
 }
 
 .app-container {
-    max-width: 1400px;
-    margin: auto;
+  max-width: 1400px;
+  margin: auto;
 }
 
 header {
-    margin-bottom: 2em;
+  margin-bottom: 2em;
 }
 
 h1 {
-    text-align: center;
-    font-size: 2.5em;
-    font-weight: 700;
-    margin-bottom: 0.5em;
-    letter-spacing: -1px;
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  letter-spacing: -1px;
 }
 
 .subtitle {
-    text-align: center;
-    font-size: 1.2em;
-    margin-bottom: 1em;
-    display: block;
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 1em;
+  display: block;
 }
 
 .main-nav {
-    display: flex;
-    justify-content: center;
-    border-bottom: 2px solid var(--border-color);
-    margin-bottom: 2em;
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 2em;
 }
 
 .nav-link {
-    padding: 1em 1.5em;
-    cursor: pointer;
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 1em;
-    font-weight: 700;
-    text-transform: uppercase;
-    border-bottom: 3px solid transparent;
+  padding: 1em 1.5em;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 3px solid transparent;
 }
 
 .nav-link:hover {
-    background-color: var(--secondary-background-color);
+  background-color: var(--secondary-background-color);
 }
 
 .nav-link.active {
-    border-bottom: 3px solid var(--text-color);
+  border-bottom: 3px solid var(--text-color);
 }
 
 .container {
-    display: block;
+  display: block;
 }
 
 h2 {
-    font-size: 1.5em;
-    font-weight: 700;
-    margin-top: 0;
-    margin-bottom: 1.5em;
-    border-bottom: 2px solid var(--text-color);
-    padding-bottom: 0.5em;
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 1.5em;
+  border-bottom: 2px solid var(--text-color);
+  padding-bottom: 0.5em;
 }
 
 h3 {
-    font-size: 1.2em;
-    font-weight: 700;
-    margin-top: 2em;
-    margin-bottom: 1em;
+  font-size: 1.2em;
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 1em;
 }
 
 #part-picker {
-    background: var(--background-color);
-    padding: 0;
+  background: var(--background-color);
+  padding: 0;
 }
 
 #part-picker label {
-    font-weight: 700;
-    margin-bottom: 0.5em;
-    display: block;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  display: block;
 }
 
 .part-group {
@@ -107,14 +107,14 @@ h3 {
 #part-picker input,
 #weight-inputs input,
 .input-item input {
-    width: 100%;
-    padding: 0.8em;
-    margin-bottom: 0.5em;
-    border: 1px solid var(--text-color);
-    border-radius: 0;
-    box-sizing: border-box;
-    background-color: var(--background-color);
-    font-size: 1em;
+  width: 100%;
+  padding: 0.8em;
+  margin-bottom: 0.5em;
+  border: 1px solid var(--text-color);
+  border-radius: 0;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+  font-size: 1em;
 }
 
 .input-item {
@@ -132,262 +132,262 @@ h3 {
 
 #part-picker span,
 .weight-badge {
-    display: block;
-    margin-bottom: 0;
-    font-weight: 700;
+  display: block;
+  margin-bottom: 0;
+  font-weight: 700;
 }
 
 .weight-input-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
 }
 
 .weight-input-group label {
-    flex: 1;
-    margin-bottom: 0;
+  flex: 1;
+  margin-bottom: 0;
 }
 
 .weight-input-group input {
-    flex: 1;
-    margin-bottom: 0;
+  flex: 1;
+  margin-bottom: 0;
 }
 
 #total-weight,
 .total-estimated-weight {
-    margin-top: 1.5em;
-    font-size: 1.2em;
-    font-weight: 700;
-    text-align: left;
+  margin-top: 1.5em;
+  font-size: 1.2em;
+  font-weight: 700;
+  text-align: left;
 }
 
 #data-tables {
-    background: var(--background-color);
-    padding: 0;
-    overflow-x: auto;
+  background: var(--background-color);
+  padding: 0;
+  overflow-x: auto;
 }
 
 .tabs {
-    display: flex;
-    border-bottom: 2px solid var(--border-color);
+  display: flex;
+  border-bottom: 2px solid var(--border-color);
 }
 
 .tab-button {
-    padding: 1em 1.5em;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-    font-size: 1em;
-    font-weight: 700;
-    border-bottom: 3px solid transparent;
-    text-transform: uppercase;
+  padding: 1em 1.5em;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 1em;
+  font-weight: 700;
+  border-bottom: 3px solid transparent;
+  text-transform: uppercase;
 }
 
 .tab-button:hover {
-    background-color: var(--secondary-background-color);
+  background-color: var(--secondary-background-color);
 }
 
 .tab-button.active {
-    border-bottom: 3px solid var(--text-color);
+  border-bottom: 3px solid var(--text-color);
 }
 
 .tab-content {
-    margin-top: 2em;
+  margin-top: 2em;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1em;
-    font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  font-family: "Courier New", Courier, monospace;
 }
 
 th,
 td {
-    border: 1px solid var(--border-color);
-    padding: 0.8em 1em;
-    text-align: left;
-    border-left: none;
-    border-right: none;
+  border: 1px solid var(--border-color);
+  padding: 0.8em 1em;
+  text-align: left;
+  border-left: none;
+  border-right: none;
 }
 
 th {
-    background-color: var(--background-color);
-    font-weight: 700;
-    border-top: 2px solid var(--text-color);
-    border-bottom: 2px solid var(--text-color);
+  background-color: var(--background-color);
+  font-weight: 700;
+  border-top: 2px solid var(--text-color);
+  border-bottom: 2px solid var(--text-color);
 }
 
 tbody tr:nth-child(odd) {
-    background-color: var(--background-color);
+  background-color: var(--background-color);
 }
 
 tbody tr:hover {
-    background-color: var(--secondary-background-color);
+  background-color: var(--secondary-background-color);
 }
 
 @media (max-width: 768px) {
-    body {
-        padding: 1em;
-    }
+  body {
+    padding: 1em;
+  }
 
-    h1 {
-        font-size: 2em;
-    }
+  h1 {
+    font-size: 2em;
+  }
 }
 
 /* Complex Calculator Styles */
 .calculator-container {
-    display: grid;
-    grid-template-columns: 350px 1fr;
-    gap: 2em;
-    align-items: start;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 2em;
+  align-items: start;
 }
 
 .inputs-section {
-    position: sticky;
-    top: 2em;
-    max-height: calc(100vh - 4em);
-    overflow-y: auto;
-    padding-right: 1em;
-    border-right: 1px solid var(--border-color);
+  position: sticky;
+  top: 2em;
+  max-height: calc(100vh - 4em);
+  overflow-y: auto;
+  padding-right: 1em;
+  border-right: 1px solid var(--border-color);
 }
 
 .results-section {
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
 }
 
 .banner {
-    padding: 1.5em;
-    border: 2px solid var(--text-color);
-    margin-bottom: 2em;
-    background-color: var(--secondary-background-color);
+  padding: 1.5em;
+  border: 2px solid var(--text-color);
+  margin-bottom: 2em;
+  background-color: var(--secondary-background-color);
 }
 
 .banner-title {
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 0.5em;
-    display: block;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+  display: block;
 }
 
 .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5em;
 }
 
 .stat-card {
-    border: 1px solid var(--text-color);
-    padding: 1.5em;
+  border: 1px solid var(--text-color);
+  padding: 1.5em;
 }
 
 .stat-label {
-    font-size: 0.8em;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #666;
-    margin-bottom: 0.5em;
-    display: block;
+  font-size: 0.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 0.5em;
+  display: block;
 }
 
 .stat-value {
-    font-size: 2em;
-    font-weight: 700;
-    display: block;
+  font-size: 2em;
+  font-weight: 700;
+  display: block;
 }
 
 .stat-sub {
-    font-size: 0.9em;
-    color: #444;
+  font-size: 0.9em;
+  color: #444;
 }
 
 .graph-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: 2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 2em;
 }
 
 .graph-card {
-    border: 1px solid var(--border-color);
-    padding: 1.5em;
+  border: 1px solid var(--border-color);
+  padding: 1.5em;
 }
 
 /* Weight Progress Bar */
 .weight-distribution {
-    margin-top: 2em;
+  margin-top: 2em;
 }
 
 .progress-bar-container {
-    height: 30px;
-    width: 100%;
-    display: flex;
-    border: 1px solid var(--text-color);
-    margin: 1.5em 0;
-    overflow: hidden;
+  height: 30px;
+  width: 100%;
+  display: flex;
+  border: 1px solid var(--text-color);
+  margin: 1.5em 0;
+  overflow: hidden;
 }
 
 .progress-segment {
-    height: 100%;
-    transition: width 0.3s ease;
-    border-right: 1px solid white;
+  height: 100%;
+  transition: width 0.3s ease;
+  border-right: 1px solid white;
 }
 
 .progress-segment:last-child {
-    border-right: none;
+  border-right: none;
 }
 
 .legend-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1em;
-    margin-top: 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1em;
+  margin-top: 1em;
 }
 
 .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    font-size: 0.85em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.85em;
 }
 
 .color-box {
-    width: 12px;
-    height: 12px;
+  width: 12px;
+  height: 12px;
 }
 
 .input-section-title {
-    font-size: 1.1em;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 1.5em 0 1em 0;
-    padding-bottom: 0.3em;
-    border-bottom: 1px solid var(--border-color);
+  font-size: 1.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 1.5em 0 1em 0;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .info-box {
-    margin-top: 1em;
-    padding: 1em;
-    background-color: #eee;
-    font-size: 0.9em;
+  margin-top: 1em;
+  padding: 1em;
+  background-color: #eee;
+  font-size: 0.9em;
 }
 
 @media (max-width: 1024px) {
-    .calculator-container {
-        grid-template-columns: 1fr;
-    }
+  .calculator-container {
+    grid-template-columns: 1fr;
+  }
 
-    .inputs-section {
-        position: static;
-        max-height: none;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 2em;
-    }
+  .inputs-section {
+    position: static;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2em;
+  }
 
-    .graph-grid {
-        grid-template-columns: 1fr;
-    }
+  .graph-grid {
+    grid-template-columns: 1fr;
+  }
 }
