@@ -74,7 +74,7 @@ const WeightPage = () => {
         </p>
       </div>
 
-      <div className="calculator-container" style={{ gridTemplateColumns: '1fr 1fr' }}>
+      <div className="calculator-container">
         <div id="part-picker" className="inputs-section">
           <h3>Part Picker</h3>
 
@@ -147,7 +147,7 @@ const WeightPage = () => {
         <div id="weight-calculator" className="results-section" style={{ padding: '1.5em' }}>
           <h3>Component Weights (g)</h3>
 
-          <div id="weight-inputs" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1em' }}>
+          <div id="weight-inputs" className="weight-inputs-grid">
             {parts.map((part) => (
               <div key={part} className="weight-input-group">
                 <label htmlFor={`${part}-weight`} style={{ fontSize: '0.85em', display: 'block', marginBottom: '0.3em' }}>{part}:</label>

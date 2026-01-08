@@ -77,7 +77,6 @@ h1 {
   font-size: 3em;
   font-weight: 800;
   margin-bottom: 0.2em;
-  letter-spacing: -2px;
   text-transform: uppercase;
 }
 
@@ -243,6 +242,7 @@ h4 {
 
 .tabs {
   display: flex;
+  flex-wrap: wrap;
   border-bottom: 2px solid var(--border-color);
 }
 
@@ -495,4 +495,111 @@ a {
 
 a {
   color: var(--accent-color);
+}
+
+/* Weight Page Styles */
+.weight-inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+@media (max-width: 768px) {
+  .weight-inputs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .part-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Manual Page Styles */
+.manual-wrapper {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 3em;
+  align-items: start;
+}
+
+.manual-toc {
+  position: sticky;
+  top: 2em;
+  max-height: calc(100vh - 4em);
+  overflow-y: auto;
+  padding-right: 1em;
+  border-right: 1px solid var(--border-color);
+  font-size: 0.9em;
+}
+
+.manual-toc h3 {
+  margin-top: 0;
+  font-size: 1.1em;
+  margin-bottom: 1em;
+}
+
+.manual-toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.manual-toc li {
+  margin-bottom: 0.5em;
+}
+
+.manual-toc a {
+  text-decoration: none;
+  color: var(--text-color);
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  display: block;
+  padding: 0.2em 0;
+}
+
+.manual-toc a:hover {
+  opacity: 1;
+  color: var(--accent-color);
+}
+
+.manual-toc .toc-h3 {
+  padding-left: 1em;
+  font-size: 0.9em;
+}
+
+.manual-content {
+  min-width: 0;
+  /* Prevents overflow issues */
+  line-height: 1.6;
+}
+
+.manual-content h1,
+.manual-content h2,
+.manual-content h3 {
+  scroll-margin-top: 2em;
+  /* Offset for sticky headers if any, or just breathing room */
+}
+
+.manual-content ul,
+.manual-content ol {
+  margin-bottom: 1.5em;
+}
+
+.manual-content li {
+  margin-bottom: 0.5em;
+}
+
+@media (max-width: 1024px) {
+  .manual-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .manual-toc {
+    position: static;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 2em;
+    margin-bottom: 2em;
+  }
 }
